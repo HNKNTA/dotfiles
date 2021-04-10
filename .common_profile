@@ -1,0 +1,78 @@
+# MacOS openssl fixes
+export LDFLAGS="-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include"
+export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
+
+HISTSIZE=10000000000
+SAVEHIST=10000000000
+
+# aliases
+alias ll="ls -alh"
+alias t="cd /tmp"
+alias aws_iad="export AWS_PROFILE=iad"
+alias aws_bau="export AWS_PROFILE=default"
+alias aws_ui="export AWS_PROFILE=baum_ui"
+# dotfiles
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+# fixes for hyper and cyrillic charset
+export LANG=ru_RU.UTF-8
+export LC_CTYPE=ru_RU.UTF-8
+
+# Set CLICOLOR if you want Ansi Colors in iTerm2
+export CLICOLOR=1
+
+# Set colors to match iTerm2 Terminal Colors
+export TERM=xterm-256color
+
+
+
+# pip2 local packages (virtualenv on macOS)
+PATH=$PATH:$HOME/Library/Python/2.7/bin
+
+
+function ssh_to_serv(){
+    ssh -i $HOME/.ssh/PSDIff.pem $1@$2
+}
+
+function centos(){
+    ssh_to_serv centos $1
+}
+
+function jbossuser(){
+    ssh_to_serv jbossuser $1
+}
+
+function terragrunt_init(){
+    terragrunt init \
+        -backend-config=bucket=platfroms-terraform-states-global \
+        -backend-config=key=bau/eu/$1/$2/terraform.tfstate \
+        -backend-config=region=us-east-1 \
+        -backend-config=acl=bucket-owner-full-control \
+        -backend-config=dynamodb_table=iad-terraform-state-locks-global
+}
+
+function terragrunt_plan(){
+    terragrunt plan \
+        -refresh=true \
+        -input=false \
+        -var iad_platform=bau \
+        -var iad_environment=$1 \
+        -var iad_component=$2 \
+        -var iad_region=eu \
+        -var vault-address="https://vault.wkgpooi.net" \
+        -out=terraform.plan \
+        -detailed-exitcode
+}
+
+# the fuck
+eval $(thefuck --alias)
+
+# Disable history sessions
+export SHELL_SESSION_HISTORY=0
+
+# mtr fix
+export PATH="/usr/local/sbin:$PATH"
+
+# C libs for python
+export CPATH=`xcrun --show-sdk-path`/usr/include
