@@ -119,3 +119,5 @@ if type brew &>/dev/null; then
 fi
 
 export PATH="/usr/local/opt/mysql-client@5.7/bin:$PATH"
+
+export PATH="/usr/local/opt/openjdk/bin:$PATH"

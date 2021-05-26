@@ -76,3 +76,6 @@ export PATH="/usr/local/sbin:$PATH"
 
 # C libs for python
 export CPATH=`xcrun --show-sdk-path`/usr/include
+
+# AWS CLI disable pagination
+export AWS_PAGER=""

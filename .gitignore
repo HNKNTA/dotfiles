@@ -32,6 +32,7 @@ Temporary Items
 
 # VSCode
 .vscode
+*.code-workspace
 
 # IDEA
 .idea
