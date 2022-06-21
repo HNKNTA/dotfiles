@@ -121,3 +121,20 @@ fi
 export PATH="/usr/local/opt/mysql-client@5.7/bin:$PATH"
 
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
+# pipx
+export PATH="$PATH:$HOME/.local/bin"
+autoload -U bashcompinit
+bashcompinit
+eval "$(register-python-argcomplete pipx)"
+
+# pyenv
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+# java
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+# rush js
+export PATH="$PATH:$HOME/SDKs/rush/node_modules/.bin"

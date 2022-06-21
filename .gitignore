@@ -42,8 +42,6 @@ Temporary Items
 .terraform
 **/.terraform/*
 .terragrunt-cache/*
-.terraform-version
-.terragrunt-version
 
 # AWS
 .aws_env

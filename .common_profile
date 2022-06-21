@@ -9,9 +9,6 @@ SAVEHIST=10000000000
 # aliases
 alias ll="ls -alh"
 alias t="cd /tmp"
-alias aws_iad="export AWS_PROFILE=iad"
-alias aws_bau="export AWS_PROFILE=default"
-alias aws_ui="export AWS_PROFILE=baum_ui"
 # dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
@@ -25,7 +22,8 @@ export CLICOLOR=1
 # Set colors to match iTerm2 Terminal Colors
 export TERM=xterm-256color
 
-
+# AWS stuff
+source ~/.common_profile_aws
 
 # pip2 local packages (virtualenv on macOS)
 PATH=$PATH:$HOME/Library/Python/2.7/bin
@@ -63,6 +61,41 @@ function terragrunt_plan(){
         -var vault-address="https://vault.wkgpooi.net" \
         -out=terraform.plan \
         -detailed-exitcode
+}
+
+function terragrunt_plan_destroy(){
+    terragrunt plan \
+        -refresh=true \
+        -input=false \
+        -var iad_platform=bau \
+        -var iad_environment=$1 \
+        -var iad_component=$2 \
+        -var iad_region=eu \
+        -var vault-address="https://vault.wkgpooi.net" \
+        -out=terraform.plan \
+        -detailed-exitcode \
+        -destroy
+}
+
+function terragrunt_destroy(){
+    terragrunt destroy \
+        -refresh=true \
+        -var iad_platform=bau \
+        -var iad_environment=$1 \
+        -var iad_component=$2 \
+        -var iad_region=eu \
+        -var vault-address="https://vault.wkgpooi.net"
+}
+
+function terragrunt_destroy_resource(){
+    terragrunt destroy \
+        -target=$3 \
+        -refresh=true \
+        -var iad_platform=bau \
+        -var iad_environment=$1 \
+        -var iad_component=$2 \
+        -var iad_region=eu \
+        -var vault-address="https://vault.wkgpooi.net"
 }
 
 # the fuck
