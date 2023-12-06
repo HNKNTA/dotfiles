@@ -51,3 +51,10 @@ node_modules
 
 # VSCode Jenkins Jack configs
 .*.config.json
+
+# Python
+.python-version
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class

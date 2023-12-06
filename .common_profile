@@ -112,3 +112,25 @@ export CPATH=`xcrun --show-sdk-path`/usr/include
 
 # AWS CLI disable pagination
 export AWS_PAGER=""
+
+# bat alias
+alias cat="bat"
+
+# mac OS homebrew cask upgrade issue workaround https://github.com/Homebrew/homebrew-cask/issues/102721
+brew_upgrade_greedy() {
+    defaults export com.apple.dock '/tmp/dock-layout.plist'
+    brew upgrade --greedy
+    defaults import com.apple.dock '/tmp/dock-layout.plist'
+    killall Dock
+
+    # activitywatch pin
+    current_dir=$(pwd)
+    cd /tmp
+    cp ~/Downloads/activitywatch.rb /tmp
+    brew uninstall activitywatch
+    brew install --build-from-source ./activitywatch.rb
+    cd $current_dir
+}
+
+# custom bin files
+export PATH=$PATH:$HOME/custom_bin

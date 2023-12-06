@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git history-sync)
+plugins=(git history-sync timer asdf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,7 +100,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
+# oh-my-zsh timer plugin
+TIMER_THRESHOLD=10
 
 # my stuff here
 source ~/.common_profile
@@ -129,8 +130,11 @@ bashcompinit
 eval "$(register-python-argcomplete pipx)"
 
 # pyenv
-eval "$(pyenv init --path)"
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+# eval "$(pyenv init --path)"
+# eval "$(pyenv init -)"
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # java
@@ -138,3 +142,9 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 
 # rush js
 export PATH="$PATH:$HOME/SDKs/rush/node_modules/.bin"
+
+# zsh-syntax-highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# fix asdf
+. /usr/local/opt/asdf/libexec/asdf.sh

@@ -156,6 +156,8 @@ content_all_charsets=false
 ignore_dirs_enable=true
 ignore_dirs=
 
+follow_symlinks=false
+
 [Panelize]
 Изменённые файлы под контролем git=git ls-files --modified
 Найти корректуры, отвергнутые командой patch=find . -name \\*.rej -print
