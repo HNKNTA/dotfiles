@@ -124,12 +124,12 @@ brew_upgrade_greedy() {
     killall Dock
 
     # activitywatch pin
-    current_dir=$(pwd)
-    cd /tmp
-    cp ~/Downloads/activitywatch.rb /tmp
-    brew uninstall activitywatch
-    brew install --build-from-source ./activitywatch.rb
-    cd $current_dir
+    # current_dir=$(pwd)
+    # cd /tmp
+    # cp ~/Downloads/activitywatch.rb /tmp
+    # brew uninstall activitywatch
+    # brew install --build-from-source ./activitywatch.rb
+    # cd $current_dir
 }
 
 # custom bin files
